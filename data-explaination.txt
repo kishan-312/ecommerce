@@ -1,0 +1,44 @@
+🔄 Actual Execution Flow:
+js
+Copy
+Edit
+const reader = new FileReader();           // ✅ Step 1: Create FileReader object
+
+reader.onloadend = () => {                 // ✅ Step 2: Define what happens after reading completes
+  const base64Image = reader.result;
+
+  // ✅ Step 5: This runs only AFTER file is fully read
+  setLists((prev) => [
+    ...prev,
+    { fname, email, mobile, pass, gender, file: base64Image },
+  ]);
+};
+
+if (file) {
+  reader.readAsDataURL(file);              // ✅ Step 3: Start reading file (asynchronously)
+                                           // FileReader now reads file in background
+}
+📊 Timeline Order (Real Execution):
+Step	What Happens	When?
+1	FileReader object is created	Immediately
+2	.onloadend event is registered (setup)	Immediately
+3	reader.readAsDataURL(file) is called	Immediately
+4	File is being read in the background	Async (takes time)
+5	Once file reading is done, onloadend triggers	When reading completes
+
+⚠️ Important Note:
+You don’t get the base64 string immediately after calling readAsDataURL. That’s why you handle it inside reader.onloadend.
+
+🎯 Simple Analogy:
+Think of readAsDataURL(file) like asking someone to scan a document.
+
+You give them the file (step 3).
+
+While they're scanning, you can't access the result.
+
+Once they finish (step 5), they give you the base64 result.
+
+Let me know if you’d like a flowchart image or animation to visualize this async flow!
+
+
+

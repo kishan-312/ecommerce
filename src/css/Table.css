@@ -1,0 +1,19 @@
+table thead tr th {
+    
+    color: white !important;
+    text-align: center !important ;
+    background-color: black !important ;
+
+}
+
+.arrowSort {
+
+    transition: all 0.4s ease;
+
+}
+
+.arrowSort:active {
+
+    scale: 1.1;
+
+}
